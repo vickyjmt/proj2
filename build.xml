@@ -1,0 +1,25 @@
+<project>
+<target name="clean">
+<delete dir="build"/>
+<delete dir="deploydir"/>
+
+</target>
+<target name="compile">
+<mkdir dir="build/classes"/>
+<javac srcdir="src" destdir="build/classes"/>
+</target>
+<target name="jar">
+<jar destfile="build/jar/myjar.jar" basedir="build/classes">
+<manifest>
+<attribute name="Main-Class" value="First"/>
+</manifest>
+</jar>
+</target>
+<target name="run">
+<java jar="build/jar/myjar.jar" fork="true"/>
+</target>
+<target name="deploy" depends="jar">
+<mkdir dir="deploydir"/>
+<unzip src="build/jar/myjar.jar" dest="deploydir"/>
+</target>
+</project>
